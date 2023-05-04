@@ -1,0 +1,56 @@
+<ng-template #loading>
+  <div class="alert alert-info">Loading...</div>
+</ng-template>
+
+<div *ngIf="country; else loading">
+  <div class="row">
+    <div class="col-12">
+      <h2>
+        Country: <strong>{{ country.name.common }}</strong>
+      </h2>
+      <hr />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Flag</h3>
+      <hr />
+      <img
+        class="img-thumbnail"
+        [src]="country.flags.svg"
+        [alt]="country.name.common"
+      />
+    </div>
+    <div class="col">
+      <h3>Information</h3>
+      <hr />
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Region:</strong> {{ country.region }}
+        </li>
+        <li class="list-group-item">
+          <strong>Subregion:</strong> {{ country.subregion }}
+        </li>
+        <li class="list-group-item">
+          <strong>Population:</strong> {{ country.population | number }}
+        </li>
+        <li class="list-group-item">
+          <strong>CCA3:</strong> {{ country.cca3 }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col">
+      <hr />
+      <h3 class="mb-2">Translations</h3>
+      <div class="d-flex flex-wrap">
+        <span
+          *ngFor="let translation of country.translations | keyvalue"
+          class="badge bg-primary m-1"
+          >{{ translation.value.common }}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div *ngIf="!isLoading && !countries; else emptyTable">
+  <div class="alert alert-danger text-center" #emptyTable>
+    No results were found, check the data entered and try again
+  </div>
+</div>
+
+<ng-template #emptyTable>
+  <div
+    *ngIf="!isLoading && countries!.length < 1; else table"
+    class="alert alert-warning text-center"
+    #emptyTable
+  >
+    There are no countries to show, try to do a search
+  </div>
+</ng-template>
+
+<ng-template #table>
+  <table class="table table-hover" *ngIf="countries!.length > 0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Icon</th>
+        <!-- <th>Flag</th> -->
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Population</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let country of countries; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ country.flag }}</td>
+        <!-- <td><img [src]="country.flags.svg" [alt]="country.name.common" /></td> -->
+        <td>{{ country.name.common }}</td>
+        <td>{{ country.capital }}</td>
+        <td>{{ country.population | number }}</td>
+        <td>
+          <a [routerLink]="['/countries', country.cca3.toLowerCase()]"
+            >View more</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
